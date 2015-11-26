@@ -2,35 +2,27 @@
 package movies.pojos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Movie {
 
     private Boolean adult;
     private String backdropPath;
-    private Object belongsToCollection;
-    private Integer budget;
-    private List<Genre> genres = new ArrayList<Genre>();
-    private String homepage;
+    private List<Integer> genreIds = new ArrayList<Integer>();
     private Integer id;
-    private String imdbId;
     private String originalLanguage;
     private String originalTitle;
     private String overview;
-    private Double popularity;
-    private String posterPath;
-    private List<ProductionCompany> productionCompanies = new ArrayList<ProductionCompany>();
-    private List<ProductionCountry> productionCountries = new ArrayList<ProductionCountry>();
     private String releaseDate;
-    private Integer revenue;
-    private Integer runtime;
-    private List<SpokenLanguage> spokenLanguages = new ArrayList<SpokenLanguage>();
-    private String status;
-    private String tagline;
+    private String posterPath;
+    private Double popularity;
     private String title;
     private Boolean video;
     private Double voteAverage;
     private Integer voteCount;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -48,6 +40,11 @@ public class Movie {
      */
     public void setAdult(Boolean adult) {
         this.adult = adult;
+    }
+
+    public Movie withAdult(Boolean adult) {
+        this.adult = adult;
+        return this;
     }
 
     /**
@@ -68,76 +65,32 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
-    /**
-     * 
-     * @return
-     *     The belongsToCollection
-     */
-    public Object getBelongsToCollection() {
-        return belongsToCollection;
-    }
-
-    /**
-     * 
-     * @param belongsToCollection
-     *     The belongs_to_collection
-     */
-    public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
+    public Movie withBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+        return this;
     }
 
     /**
      * 
      * @return
-     *     The budget
+     *     The genreIds
      */
-    public Integer getBudget() {
-        return budget;
+    public List<Integer> getGenreIds() {
+        return genreIds;
     }
 
     /**
      * 
-     * @param budget
-     *     The budget
+     * @param genreIds
+     *     The genre_ids
      */
-    public void setBudget(Integer budget) {
-        this.budget = budget;
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
     }
 
-    /**
-     * 
-     * @return
-     *     The genres
-     */
-    public List<Genre> getGenres() {
-        return genres;
-    }
-
-    /**
-     * 
-     * @param genres
-     *     The genres
-     */
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
-    }
-
-    /**
-     * 
-     * @return
-     *     The homepage
-     */
-    public String getHomepage() {
-        return homepage;
-    }
-
-    /**
-     * 
-     * @param homepage
-     *     The homepage
-     */
-    public void setHomepage(String homepage) {
-        this.homepage = homepage;
+    public Movie withGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
+        return this;
     }
 
     /**
@@ -158,22 +111,9 @@ public class Movie {
         this.id = id;
     }
 
-    /**
-     * 
-     * @return
-     *     The imdbId
-     */
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    /**
-     * 
-     * @param imdbId
-     *     The imdb_id
-     */
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
+    public Movie withId(Integer id) {
+        this.id = id;
+        return this;
     }
 
     /**
@@ -194,6 +134,11 @@ public class Movie {
         this.originalLanguage = originalLanguage;
     }
 
+    public Movie withOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+        return this;
+    }
+
     /**
      * 
      * @return
@@ -210,6 +155,11 @@ public class Movie {
      */
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
+    }
+
+    public Movie withOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+        return this;
     }
 
     /**
@@ -230,76 +180,9 @@ public class Movie {
         this.overview = overview;
     }
 
-    /**
-     * 
-     * @return
-     *     The popularity
-     */
-    public Double getPopularity() {
-        return popularity;
-    }
-
-    /**
-     * 
-     * @param popularity
-     *     The popularity
-     */
-    public void setPopularity(Double popularity) {
-        this.popularity = popularity;
-    }
-
-    /**
-     * 
-     * @return
-     *     The posterPath
-     */
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    /**
-     * 
-     * @param posterPath
-     *     The poster_path
-     */
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    /**
-     * 
-     * @return
-     *     The productionCompanies
-     */
-    public List<ProductionCompany> getProductionCompanies() {
-        return productionCompanies;
-    }
-
-    /**
-     * 
-     * @param productionCompanies
-     *     The production_companies
-     */
-    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
-        this.productionCompanies = productionCompanies;
-    }
-
-    /**
-     * 
-     * @return
-     *     The productionCountries
-     */
-    public List<ProductionCountry> getProductionCountries() {
-        return productionCountries;
-    }
-
-    /**
-     * 
-     * @param productionCountries
-     *     The production_countries
-     */
-    public void setProductionCountries(List<ProductionCountry> productionCountries) {
-        this.productionCountries = productionCountries;
+    public Movie withOverview(String overview) {
+        this.overview = overview;
+        return this;
     }
 
     /**
@@ -320,94 +203,55 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    /**
-     * 
-     * @return
-     *     The revenue
-     */
-    public Integer getRevenue() {
-        return revenue;
-    }
-
-    /**
-     * 
-     * @param revenue
-     *     The revenue
-     */
-    public void setRevenue(Integer revenue) {
-        this.revenue = revenue;
+    public Movie withReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+        return this;
     }
 
     /**
      * 
      * @return
-     *     The runtime
+     *     The posterPath
      */
-    public Integer getRuntime() {
-        return runtime;
+    public String getPosterPath() {
+        return posterPath;
     }
 
     /**
      * 
-     * @param runtime
-     *     The runtime
+     * @param posterPath
+     *     The poster_path
      */
-    public void setRuntime(Integer runtime) {
-        this.runtime = runtime;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
-    /**
-     * 
-     * @return
-     *     The spokenLanguages
-     */
-    public List<SpokenLanguage> getSpokenLanguages() {
-        return spokenLanguages;
-    }
-
-    /**
-     * 
-     * @param spokenLanguages
-     *     The spoken_languages
-     */
-    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
+    public Movie withPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+        return this;
     }
 
     /**
      * 
      * @return
-     *     The status
+     *     The popularity
      */
-    public String getStatus() {
-        return status;
+    public Double getPopularity() {
+        return popularity;
     }
 
     /**
      * 
-     * @param status
-     *     The status
+     * @param popularity
+     *     The popularity
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPopularity(Double popularity) {
+        this.popularity = popularity;
     }
 
-    /**
-     * 
-     * @return
-     *     The tagline
-     */
-    public String getTagline() {
-        return tagline;
-    }
-
-    /**
-     * 
-     * @param tagline
-     *     The tagline
-     */
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
+    public Movie withPopularity(Double popularity) {
+        this.popularity = popularity;
+        return this;
     }
 
     /**
@@ -428,6 +272,11 @@ public class Movie {
         this.title = title;
     }
 
+    public Movie withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
     /**
      * 
      * @return
@@ -444,6 +293,11 @@ public class Movie {
      */
     public void setVideo(Boolean video) {
         this.video = video;
+    }
+
+    public Movie withVideo(Boolean video) {
+        this.video = video;
+        return this;
     }
 
     /**
@@ -464,6 +318,11 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
+    public Movie withVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
+        return this;
+    }
+
     /**
      * 
      * @return
@@ -480,6 +339,24 @@ public class Movie {
      */
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public Movie withVoteCount(Integer voteCount) {
+        this.voteCount = voteCount;
+        return this;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    public Movie withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }
