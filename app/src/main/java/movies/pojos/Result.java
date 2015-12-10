@@ -1,61 +1,62 @@
 
 package movies.pojos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Result {
 
-    private Boolean adult;
-    private String backdropPath;
+    @SerializedName("genre_ids")
+    @Expose
     private List<Integer> genreIds = new ArrayList<Integer>();
+
+    @SerializedName("id")
+    @Expose
     private Integer id;
+
+    @SerializedName("original_language")
+    @Expose
     private String originalLanguage;
+
+    @SerializedName("original_title")
+    @Expose
     private String originalTitle;
+
+    @SerializedName("overview")
+    @Expose
     private String overview;
+
+    @SerializedName("release_date")
+    @Expose
     private String releaseDate;
+
+    @SerializedName("poster_path")
+    @Expose
     private String posterPath;
+
+    @SerializedName("popularity")
+    @Expose
     private Double popularity;
+
+    @SerializedName("title")
+    @Expose
     private String title;
+
+    @SerializedName("video")
+    @Expose
     private Boolean video;
+
+    @SerializedName("vote_average")
+    @Expose
     private Double voteAverage;
+
+    @SerializedName("vote_count")
+    @Expose
     private Integer voteCount;
 
-    /**
-     * 
-     * @return
-     *     The adult
-     */
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    /**
-     * 
-     * @param adult
-     *     The adult
-     */
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-    }
-
-    /**
-     * 
-     * @return
-     *     The backdropPath
-     */
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    /**
-     * 
-     * @param backdropPath
-     *     The backdrop_path
-     */
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-    }
 
     /**
      * 
@@ -271,6 +272,12 @@ public class Result {
      */
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
+    }
+
+
+    public String getPosterImage() {
+//        String urlServer = getPosterPath();
+        return "http://image.tmdb.org/t/p/w154" + getPosterPath();
     }
 
 }

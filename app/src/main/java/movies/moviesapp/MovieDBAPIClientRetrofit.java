@@ -30,14 +30,27 @@ public class MovieDBAPIClientRetrofit {
                                 .baseUrl(BASE_URL)
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
+    }
+
+    public void getPopularMovies(final ArrayAdapter<Result> adapter){
+
+        serviceInterface = retrofit.create(MoviesInterface.class);//Creación del servicio
+        Call<MoviesData> call = serviceInterface.getPopularMovies(API_KEY);
+        processCall(adapter, call);
+
+    }
+
+    public void getRatedMovies(final ArrayAdapter<Result> adapter){
+
+        serviceInterface = retrofit.create(MoviesInterface.class);//Creación del servicio
+        Call<MoviesData> call = serviceInterface.getRatedMovies(API_KEY);
+        processCall(adapter, call);
 
     }
 
 
-    public void getPopularMovies(final ArrayAdapter<String> adapter){
+    private void processCall(final ArrayAdapter<Result> adapter, Call<MoviesData> call){
 
-        serviceInterface = retrofit.create(MoviesInterface.class);//Creación del servicio
-        Call<MoviesData> call = serviceInterface.getPopularMovies(API_KEY);
         call.enqueue(new Callback<MoviesData>() {
             @Override
             public void onResponse(Response<MoviesData> response, Retrofit retrofit) {
@@ -46,13 +59,21 @@ public class MovieDBAPIClientRetrofit {
                 if (response.isSuccess()){
 //                    Log.d("Resultsss", String.valueOf(response.body().getResults().size()));
                     movies = response.body().getResults();
-                    Log.d("id", String.valueOf(movies.get(0).getId()));
-                    Log.d("title", movies.get(0).getTitle());
-                    Log.d("overview", movies.get(0).getOverview());
+//                    Log.d("id", String.valueOf(movies.get(0).getId()));
+//                    Log.d("title", movies.get(0).getTitle());
+//                    Log.d("overview", movies.get(0).getOverview());
+//                    Log.d("imagen", movies.get(0).getPosterPath());
+//                    Log.d("idioma", movies.get(0).getOriginalLanguage());
 
                     adapter.clear();
                     for (Result movie : movies) {
-                        adapter.add(movie.getTitle());
+                        adapter.add(movie);
+
+                        Log.d("id", String.valueOf(movie.getId()));
+                        Log.d("title", movie.getTitle());
+                        Log.d("overview", movie.getOverview());
+                        Log.d("imagen", (movie.getPosterPath() != null) ? movie.getPosterPath() : "no hay");
+                        Log.d("idioma", (movie.getOriginalLanguage() != null) ? movie.getOriginalLanguage() : "no hay");
                     }
 
 
@@ -67,8 +88,7 @@ public class MovieDBAPIClientRetrofit {
                 Log.e("Errorrrr....", "errorrrr..");
                 t.printStackTrace();
             }
-        });
-
+        });//END CALLBACK
 
 
     }
@@ -82,10 +102,9 @@ public class MovieDBAPIClientRetrofit {
         Call<MoviesData> getPopularMovies(@Query("api_key") String apiKey);
 
         @GET("movie/top_rated")
-        Call<String> getRatedMovies(@Query("api_key") String apiKey);
+        Call<MoviesData> getRatedMovies(@Query("api_key") String apiKey);
 
     }
-
 
 
 }

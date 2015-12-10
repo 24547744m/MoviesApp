@@ -1,6 +1,8 @@
 package movies.moviesapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,15 +15,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import movies.pojos.Result;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
 
-    private ArrayList<String> items;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Result> items;
+    private MoviesAdapter adapter;
 
 
     public MainActivityFragment() {
@@ -42,22 +45,12 @@ public class MainActivityFragment extends Fragment {
         //obteniendo el listView del xml y seteandolo al view principal
         ListView lvMovies = (ListView) rootView.findViewById(R.id.lvMovies);
 
-        String[] data = {
-                "Los 400 golpes",
-                "El odio",
-                "El padrino",
-                "El padrino. Parte II",
-                "Ocurrió cerca de su casa",
-                "Infiltrados",
-                "Umberto D."
-        };
 
-        items = new ArrayList<>(Arrays.asList(data));
+        items = new ArrayList<>();
 
-        adapter = new ArrayAdapter<String>(
+        adapter = new MoviesAdapter(
                 getContext(),
                 R.layout.movie_row,
-                R.id.tvMovie,
                 items
         );
         lvMovies.setAdapter(adapter);
@@ -68,7 +61,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        refresh();
+//        refresh();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -93,7 +86,15 @@ public class MainActivityFragment extends Fragment {
         Log.d("refresshh","...");
 
         MovieDBAPIClientRetrofit apiClient = new MovieDBAPIClientRetrofit();
-        apiClient.getPopularMovies(adapter);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String filterQuery = preferences.getString("filter_movie", "popular");
+        if (filterQuery.equals("popular")){
+            apiClient.getPopularMovies(adapter);
+        }else{
+            apiClient.getRatedMovies(adapter);
+        }
+
 
     }
 

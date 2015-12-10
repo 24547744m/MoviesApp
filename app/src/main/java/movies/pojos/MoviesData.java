@@ -1,14 +1,27 @@
 
 package movies.pojos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesData {
-
+    @SerializedName("page")
+    @Expose
     private Integer page;
+
+    @SerializedName("results")
+    @Expose
     private List<Result> results = new ArrayList<Result>();
+
+    @SerializedName("totalPages")
+    @Expose
     private Integer totalPages;
+
+    @SerializedName("totalResults")
+    @Expose
     private Integer totalResults;
 
     /**
